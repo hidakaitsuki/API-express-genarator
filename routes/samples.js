@@ -29,4 +29,16 @@ router.get("/test", function (req, res, next) {
     res.header("Content-Type", "application/json; charset=utf-8");
     res.send(param);
   });
+
+
+
+  router.get("/test1", function (req, res, next) {
+    var param = {
+      sample: "これはサンプルAPIです!!!!!!!!!",
+      array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
+      test: [test, test, test],
+    };
+    res.header("Content-Type", "application/json; charset=utf-8");
+    res.send(param);
+  });
 module.exports = router;
