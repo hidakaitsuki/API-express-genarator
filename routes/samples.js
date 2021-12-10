@@ -9,7 +9,7 @@ router.get("/", function (req, res, next) {
   var param = {
     sample: "これはサンプルAPIです",
     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
-    test: [test, test, test],
+    test: ["test", "test", "test"],
   };
   res.header("Content-Type", "application/json; charset=utf-8");
   res.send(param);
@@ -25,20 +25,22 @@ router.get("/hello", function (req, res, next) {
   res.send(param);
 });
 router.get("/test", function (req, res, next) {
-    var param = { result: "Hello World !", test: [1, 2, 3, 4, 5, 6, 7, 8, 8, 0],test1:[1,1,1,1,1,1,1,1,1,1,1] };
-    res.header("Content-Type", "application/json; charset=utf-8");
-    res.send(param);
-  });
+  var param = {
+    result: "Hello World !",
+    test: [1, 2, 3, 4, 5, 6, 7, 8, 8, 0],
+    test1: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  };
+  res.header("Content-Type", "application/json; charset=utf-8");
+  res.send(param);
+});
 
-
-
-  router.get("/testttt", function (req, res, next) {
-    var param = {
-      sample: "sampleAPI!!!!!!!!",
-      array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
-      test: [test, test, test],
-    };
-    res.header("Content-Type", "application/json; charset=utf-8");
-    res.send(param);
-  });
+router.get("/testttt", function (req, res, next) {
+  var param = {
+    sample: "sampleAPI!!!!!!!!",
+    array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
+    test: [test, test, test],
+  };
+  res.header("Content-Type", "application/json; charset=utf-8");
+  res.send(param);
+});
 module.exports = router;
