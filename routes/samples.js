@@ -34,7 +34,7 @@ router.get("/test", function (req, res, next) {
 
   router.get("/test1", function (req, res, next) {
     var param = {
-      sample: "これはサンプルAPIです!!!!!!!!!",
+      sample: "sampleAPI!!!!!!!!",
       array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
       test: [test, test, test],
     };
