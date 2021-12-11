@@ -15,9 +15,9 @@ router.get("/", function (req, res, next) {
     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
     test: ["test", "test", "test"],
   };
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header("Content-Type", "application/json; charset=utf-8");
-  res.send(param);
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.json(param);
 });
 
 /* サンプルAPI②
