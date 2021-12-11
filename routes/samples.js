@@ -16,7 +16,7 @@ router.get("/", function (req, res, next) {
     test: ["test", "test", "test"],
   };
 //   res.header("Content-Type", "application/json; charset=utf-8");
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080')
+  res.setHeader('Access-Control-Allow-Origin', '*')
   res.json(param);
 });
 
