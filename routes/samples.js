@@ -4,6 +4,10 @@ var router = express.Router();
 /* サンプルAPI①
  * http://localhost:3000/samples にGETメソッドのリクエストを投げると、
  * JSON形式で文字列を返す。
+ * 
+ * herokuデプロイ済み
+ * https://create-api-rks.herokuapp.com/samples
+ * 
  */
 router.get("/", function (req, res, next) {
   var param = {
@@ -11,8 +15,9 @@ router.get("/", function (req, res, next) {
     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
     test: ["test", "test", "test"],
   };
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
   res.header("Content-Type", "application/json; charset=utf-8");
-  res.json(param);
+  res.send(param);
 });
 
 /* サンプルAPI②
@@ -24,14 +29,7 @@ router.get("/hello", function (req, res, next) {
   res.header("Content-Type", "application/json; charset=utf-8");
   res.send(param);
 });
-router.get("/test", function (req, res, next) {
-  var param = {
-    result: "Hello World !",
-    test: [1, 2, 3, 4, 5, 6, 7, 8, 8, 0],
-    test1: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  };
-  res.header("Content-Type", "application/json; charset=utf-8");
-  res.send(param);
-});
+
+
 
 module.exports = router;
