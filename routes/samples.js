@@ -1,4 +1,5 @@
 var express = require("express");
+const { Sample } = require("../sample");
 var router = express.Router();
 
 /* サンプルAPI①
@@ -10,12 +11,12 @@ var router = express.Router();
  *
  */
 router.get("/", function (req, res) {
-  var param = {
-    "sample": "これはサンプルAPIです",
-    "array": [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
-    "test": ["test", "test", "test"],
-  };
-    res.header("Content-Type", "application/json; charset=utf-8");
+  var param = new Sample(
+    "これはサンプルAPIです",
+    [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
+    ["test", "test", "test"]
+  );
+  res.header("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(param);
 });
