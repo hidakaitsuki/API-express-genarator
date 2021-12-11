@@ -9,7 +9,7 @@ var router = express.Router();
  * https://create-api-rks.herokuapp.com/samples
  * 
  */
-router.get("/", function (req, res, next) {
+router.get("/", function (req, res) {
   var param = {
     sample: "これはサンプルAPIです",
     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
