@@ -27,6 +27,8 @@ router.get("/", function (req, res) {
 router.get("/hello", function (req, res, next) {
   var param = { result: "Hello World !", test: [1, 2, 3, 4, 5, 6, 7, 8, 8, 0] };
   res.header("Content-Type", "application/json; charset=utf-8");
+  res.setHeader('Access-Control-Allow-Origin', '*')
+
   res.send(param);
 });
 
