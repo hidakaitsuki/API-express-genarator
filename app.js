@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 // ここに新しく作りたいAPI追加
 var samples = require('./routes/samples');
+// mongoDBを簡単に操作できる「mongoose」をインポート
+var mongoose=require("mongoose")
 
 var app = express();
 
@@ -23,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// ここの下にAPI
+// ここの下に上で作ったAPI
 app.use('/samples', samples)
 
 // catch 404 and forward to error handler

@@ -9,7 +9,7 @@ var router = express.Router();
  * https://create-api-rks.herokuapp.com/samples
  *
  */
-router.get("/", function (req, res) {
+router.post("/", function (req, res) {
   var param = {
     sample: "これはサンプルAPIです",
     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
@@ -17,15 +17,15 @@ router.get("/", function (req, res) {
   };
   res.header("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.json(param);
+  res.json(req.body);
 });
 
 /* サンプルAPI②
  * http://localhost:3000/samples/hello にGETメソッドのリクエストを投げると、
  * JSON形式で文字列を返す。
  */
-router.get("/hello", function (req, res, next) {
-  var param = { result: "Hello World !", test: [1, 2, 3, 4, 5, 6, 7, 8, 8, 0] };
+router.post("/hello", function (req, res, next) {
+  const {name,email,password}=req.body
   res.header("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Access-Control-Allow-Origin", "*");
 
