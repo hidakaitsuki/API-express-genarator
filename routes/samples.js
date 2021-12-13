@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
-
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 /* サンプルAPI①
  * http://localhost:3000/samples にGETメソッドのリクエストを投げると、
  * JSON形式で文字列を返す。
@@ -15,7 +17,7 @@ router.post("/", function (req, res) {
     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
     test: ["test", "test", "test"],
   };
-  res.header("Content-Type", 'text/plain');
+  res.header("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(req.body);
 });
