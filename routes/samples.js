@@ -17,7 +17,7 @@ router.post("/", function (req, res) {
   };
   res.header("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.send(JSON.stringify(req.body));
+  res.send(req.body);
 });
 
 /* サンプルAPI②
@@ -25,7 +25,7 @@ router.post("/", function (req, res) {
  * JSON形式で文字列を返す。
  */
 router.post("/hello", function (req, res, next) {
-  const { name, email, password } = req.body;
+  const {name,email,password}=req.body
   res.header("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Access-Control-Allow-Origin", "*");
 
