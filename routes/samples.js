@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 /* サンプルAPI①
  * http://localhost:3000/samples にGETメソッドのリクエストを投げると、
  * JSON形式で文字列を返す。
