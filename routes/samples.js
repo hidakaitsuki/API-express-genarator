@@ -1,6 +1,7 @@
 var express = require("express");
+const app = require("../app");
 var router = express.Router();
-app.use(express.json());
+
 /* サンプルAPI①
  * http://localhost:3000/samples にGETメソッドのリクエストを投げると、
  * JSON形式で文字列を返す。
@@ -9,7 +10,7 @@ app.use(express.json());
  * https://create-api-rks.herokuapp.com/samples
  *
  */
-router.post("/", function (req, res) {
+app.post("/", function (req, res) {
   var param = {
     sample: "これはサンプルAPIです",
     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
