@@ -17,7 +17,7 @@ router.post("/", function (req, res) {
 //   };
   res.header("Content-Type", "application/json; charset=utf-8");
   res.set("Access-Control-Allow-Origin", "*");
-  res.send(req.ClientRequest);
+  res.send(req.http.ClientRequest);
 });
 
 /* サンプルAPI②
