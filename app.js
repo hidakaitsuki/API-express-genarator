@@ -10,8 +10,7 @@ var usersRouter = require("./routes/users");
 var samples = require("./routes/samples");
 // mongoDBを簡単に操作できる「mongoose」をインポート
 var mongoose = require("mongoose");
-// postされた内容を利用するライブラリ「bodyparder」をインポート
-var bodyParser = require("body-parser");
+
 var app = express();
 
 // view engine setup
@@ -28,9 +27,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 // ここの下に上で作ったAPI
 app.use("/samples", samples);
-//  postされた内容を利用するライブラリ「bodyparder」を利用
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 
 app.use(express.json());
 
