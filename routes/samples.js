@@ -15,7 +15,7 @@ router.post("/", function (req, res) {
 //     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
 //     test: ["test", "test", "test"],
 //   };
-//   res.header("Content-Type", "application/json; charset=utf-8");
+  res.header("Content-Type", "application/json");
   res.set("Access-Control-Allow-Origin", "*");
   res.send(req.body);
 });
