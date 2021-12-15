@@ -11,7 +11,7 @@ var samples = require("./routes/samples");
 // mongoDBを簡単に操作できる「mongoose」をインポート
 var mongoose = require("mongoose");
 
-const cors = require('cors')
+const cors = require("cors");
 var app = express();
 
 // view engine setup
@@ -29,8 +29,7 @@ app.use("/users", usersRouter);
 // ここの下に上で作ったAPI
 app.use("/samples", samples);
 
-app.use(cors())
-
+app.use(cors());
 
 app.use(express.json());
 

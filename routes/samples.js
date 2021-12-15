@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
 /* サンプルAPI①
  * http://localhost:3000/samples にGETメソッドのリクエストを投げると、
  * JSON形式で文字列を返す。
@@ -11,13 +10,12 @@ app.use(express.urlencoded({ extended: false }));
  *
  */
 router.post("/", function (req, res) {
-  //   var param = {
-  //     sample: "これはサンプルAPIです",
-  //     array: [1, 2, 3, 4, 4, 5, 6, 7, 7, 8],
-  //     test: ["test", "test", "test"],
-  //   };
+ 
+  // console.log(req);
+  // console.dir("bodyの中身" + JSON.stringify(req));
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.set("Access-Control-Allow-Origin", "*");
+
   res.send(req.body);
 });
 
