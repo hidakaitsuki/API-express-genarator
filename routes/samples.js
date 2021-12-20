@@ -15,7 +15,7 @@ router.post("/", function (req, res) {
   // console.dir("bodyの中身" + JSON.stringify(req));
   // res.setHeader("Content-Type", "application/json; charset=utf-8");
   // res.set("Access-Control-Allow-Origin", "*");
-  res.send("test");
+  res.send(req.body);
 });
 
 /* サンプルAPI②
