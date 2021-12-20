@@ -10,13 +10,12 @@ var router = express.Router();
  *
  */
 router.post("/", function (req, res) {
- 
-  // console.log(req);
+  const test = req.body;
+  console.log(test);
   // console.dir("bodyの中身" + JSON.stringify(req));
-  res.setHeader("Content-Type", "application/json; charset=utf-8");
-  res.set("Access-Control-Allow-Origin", "*");
-
-  res.send(req.body);
+  // res.setHeader("Content-Type", "application/json; charset=utf-8");
+  // res.set("Access-Control-Allow-Origin", "*");
+  res.send("test");
 });
 
 /* サンプルAPI②
@@ -24,11 +23,12 @@ router.post("/", function (req, res) {
  * JSON形式で文字列を返す。
  */
 router.post("/hello", function (req, res, next) {
-  const { name, email, password } = req.body;
+  // const { name, email, password } = req.body;
+  console.dir("bodyの中身" + JSON.stringify(req.body));
   res.header("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Access-Control-Allow-Origin", "*");
 
-  res.send(param);
+  res.send("hello");
 });
 
 router.get("/pokemon", function (req, res, next) {
