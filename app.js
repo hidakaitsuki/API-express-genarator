@@ -24,12 +24,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// cors（アクセスを許可する仕組み）は下のAPIのuseよりも上にする
+app.use(cors());
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 // ここの下に上で作ったAPI
 app.use("/samples", samples);
 
-app.use(cors());
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
