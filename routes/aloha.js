@@ -32,7 +32,7 @@ router.get("/", function (req, res) {
 const itemdetailSchema = mongoose.Schema({ items: Object });
 
 // 商品詳細
-const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
+// const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
 router.post("/detail", function (req, res) {
 //   const itemdetail = new itemdetailmodel();
   itemdetail.items = req.body.item;
