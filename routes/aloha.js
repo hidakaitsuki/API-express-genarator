@@ -32,19 +32,19 @@ router.get("/", function (req, res) {
 const itemdetailSchema = mongoose.Schema({ items: Object });
 
 // 商品詳細
-// const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
 router.post("/detail", function (req, res) {
-//   const itemdetail = new itemdetailmodel();
-  itemdetail.items = req.body.item;
-  itemdetail.save();
+    const itemdetail = new itemdetailmodel();
+    itemdetail.items = req.body.item;
+    itemdetail.save();
 });
 router.get("/detail/1", function (req, res) {
-  const itemdetailSchema = mongoose.Schema({
-    _id: String,
-    items: Object,
-    __v: Number,
-  });
-  const itemdetail = new itemdetailmodel("itemdetails", itemdetailSchema);
+    const itemdetailSchema = mongoose.Schema({
+        _id: String,
+        items: Object,
+        __v: Number,
+    });
+    const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
+  const itemdetail = new itemdetailmodel();
   itemdetail.find({"items.id":1}, function (err, result) {
     res.send(result);
   });
