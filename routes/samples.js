@@ -6,7 +6,7 @@ var router = express.Router();
  * JSON形式で文字列を返す。
  *
  * herokuデプロイ済み
- * https://create-api-rks.herokuapp.com/samples
+ * https://api-rks-generator.herokuapp.com/samples
  *
  */
 router.post("/", function (req, res) {
