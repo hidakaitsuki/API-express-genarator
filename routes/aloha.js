@@ -21,5 +21,15 @@ router.post("/", function (req, res) {
   items.totalItemCount = req.body.totalItemCount;
   items.save();
 });
+const itemdetailSchema = mongoose.Schema(
+  { items: Array },
+  { totalItemCount: Number }
+);
+const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
+router.post("/detail", function (req, res) {
+  const itemdetail = new itemdetailmodel();
+  itemdetail.items = req.body.items;
+  itemdetail.save();
+});
 
 module.exports = router;
