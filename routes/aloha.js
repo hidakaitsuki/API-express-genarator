@@ -37,6 +37,7 @@ router.post("/detail", function (req, res) {
     itemdetail.items = req.body.item;
     itemdetail.save();
 });
+
 router.get("/detail/1", function (req, res) {
     const itemdetailSchema = mongoose.Schema({
         _id: String,
@@ -45,7 +46,7 @@ router.get("/detail/1", function (req, res) {
     });
     const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
   const itemdetail = new itemdetailmodel();
-  itemdetail.find({"items.id":1}, function (err, result) {
+  itemdetailmodel.find({"items.id":1}, function (err, result) {
     res.send(result);
   });
 });
