@@ -14,7 +14,7 @@ const itemSchema = mongoose.Schema({ item: Array });
 const itemmodel = mongoose.model("items",itemSchema);
 router.post("/", function (req, res) {
   const items = new itemmodel();
-  items=req.body
+  items.item=req.body
   items.save()
 });
 
