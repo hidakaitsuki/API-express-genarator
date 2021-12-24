@@ -10,12 +10,16 @@ mongoose.connect(
     console.log("mongoDBに接続しました");
   }
 );
-const itemSchema = mongoose.Schema();
-const itemmodel = mongoose.model("items",itemSchema);
+const itemSchema = mongoose.Schema(
+  { items: Array },
+  { totalItemCount: Number }
+);
+const itemmodel = mongoose.model("items", itemSchema);
 router.post("/", function (req, res) {
   const items = new itemmodel();
-  items=req.body
-  items.save()
+  items.items = req.body.items;
+  items.totalItemCount = req.body.totalItemCount;
+  items.save();
 });
 
 module.exports = router;
