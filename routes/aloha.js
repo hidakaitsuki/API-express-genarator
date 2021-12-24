@@ -47,7 +47,7 @@ router.get("/detail/:id", function (req, res) {
     const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
 
   itemdetailmodel.find({"item.id":Number(req.params.id)}, function (err, result) {
-    res.send(result);
+    res.send(result[0]);
   });
   itemdetailmodel.find({})
 });
