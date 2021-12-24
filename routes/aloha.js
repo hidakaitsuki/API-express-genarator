@@ -40,13 +40,13 @@ router.post("/detail", function (req, res) {
 
 const itemdetailSchema = mongoose.Schema({
     _id: String,
-    items: Object,
+    item: Object,
     __v: Number,
 });
 router.get("/detail/:id", function (req, res) {
     const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
 
-  itemdetailmodel.find({"items.id":Number(req.params.id)}, function (err, result) {
+  itemdetailmodel.find({"item.id":Number(req.params.id)}, function (err, result) {
     res.send(result);
   });
   itemdetailmodel.find({})
