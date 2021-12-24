@@ -49,6 +49,7 @@ router.get("/detail/:id", function (req, res) {
   itemdetailmodel.find({"items.id":Number(req.params.id)}, function (err, result) {
     res.send(result);
   });
+  itemdetailmodel.find({})
 });
 
 module.exports = router;
