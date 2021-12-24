@@ -38,14 +38,14 @@ router.post("/detail", function (req, res) {
   itemdetail.items = req.body.item;
   itemdetail.save();
 });
-router.get("/detail/:id", function (req, res) {
+router.get("/detail/1", function (req, res) {
   const itemdetailSchema = mongoose.Schema({
     _id: String,
-    items: Array,
+    items: Object,
     __v: Number,
   });
   const itemdetail = new itemdetailmodel("itemdetails", itemdetailSchema);
-  itemdetail.find({items:req.params.id}, function (err, result) {
+  itemdetail.find({"items.id":1}, function (err, result) {
     res.send(result);
   });
 });
