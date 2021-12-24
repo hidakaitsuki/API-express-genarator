@@ -28,7 +28,7 @@ const itemdetailSchema = mongoose.Schema(
 const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
 router.post("/detail", function (req, res) {
   const itemdetail = new itemdetailmodel();
-  itemdetail.items = req.body.items;
+  itemdetail.items = req.body.item;
   itemdetail.save();
 });
 
