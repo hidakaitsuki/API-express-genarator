@@ -29,7 +29,7 @@ router.get("/", function (req, res) {
         res.send(result[0]);
     });
 });
-const itemdetailSchema = mongoose.Schema({ items: Object });
+
 
 // 商品詳細
 router.post("/detail", function (req, res) {
