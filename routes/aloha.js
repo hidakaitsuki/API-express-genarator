@@ -14,6 +14,8 @@ const itemSchema = mongoose.Schema(
   { items: Array },
   { totalItemCount: Number }
 );
+
+// 商品一覧
 const itemmodel = mongoose.model("items", itemSchema);
 router.post("/", function (req, res) {
   const items = new itemmodel();
@@ -21,9 +23,15 @@ router.post("/", function (req, res) {
   items.totalItemCount = req.body.totalItemCount;
   items.save();
 });
-const itemdetailSchema = mongoose.Schema(
-  { items: Array }
-);
+const itemdetailSchema = mongoose.Schema({ items: Array });
+router.get("/", function (req, res) {
+  const itemmodel = mongoose.model("items", itemSchema);
+  itemmodel.find({}, function (error, result) {
+    res.send(result[0]);
+  });
+});
+
+// 商品詳細
 const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
 router.post("/detail", function (req, res) {
   const itemdetail = new itemdetailmodel();
