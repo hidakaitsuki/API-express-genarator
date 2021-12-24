@@ -23,13 +23,13 @@ router.post("/", function (req, res) {
   items.totalItemCount = req.body.totalItemCount;
   items.save();
 });
-const itemdetailSchema = mongoose.Schema({ items: Array });
 router.get("/", function (req, res) {
-  const itemmodel = mongoose.model("items", itemSchema);
-  itemmodel.find({}, function (error, result) {
-    res.send(result[0]);
-  });
+    const itemmodel = mongoose.model("items", itemSchema);
+    itemmodel.find({}, function (error, result) {
+        res.send(result[0]);
+    });
 });
+const itemdetailSchema = mongoose.Schema({ items: Object });
 
 // 商品詳細
 const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
@@ -37,6 +37,17 @@ router.post("/detail", function (req, res) {
   const itemdetail = new itemdetailmodel();
   itemdetail.items = req.body.item;
   itemdetail.save();
+});
+router.get("/detail/:id", function (req, res) {
+  const itemdetailSchema = mongoose.Schema({
+    _id: String,
+    items: Array,
+    __v: Number,
+  });
+  const itemdetail = new itemdetailmodel("itemdetails", itemdetailSchema);
+  itemdetail.find({items:req.params.id}, function (err, result) {
+    res.send(result);
+  });
 });
 
 module.exports = router;
