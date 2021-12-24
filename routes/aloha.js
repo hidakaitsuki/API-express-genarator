@@ -10,11 +10,11 @@ mongoose.connect(
     console.log("mongoDBに接続しました");
   }
 );
-const itemSchema = mongoose.Schema({ item: Array });
+const itemSchema = mongoose.Schema({ items: Array });
 const itemmodel = mongoose.model("items",itemSchema);
 router.post("/", function (req, res) {
   const items = new itemmodel();
-  items.item=req.body
+  items.items=req.body
   items.save()
 });
 
