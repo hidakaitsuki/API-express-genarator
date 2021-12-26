@@ -152,13 +152,13 @@ router.post("/order", function (req, res) {
   const ordermodel = mongoose.model("order", orderSchema);
 
   //   IDを自動採番するために今あるデータ数を取得
-  let totalcount = 0;
+  let totalcounts = 0;
   ordermodel.countDocuments(function (err, result) {
-    totalcount = result;
+    totalcounts = result;
   });
 
   const order = new ordermodel();
-  order.id = totalcount + 1;
+  order.id = totalcounts + 1;
   order.userId = req.body.userId;
   order.totalPrice = req.body.totalPrice;
   order.destinationName = req.body.destinationName;
