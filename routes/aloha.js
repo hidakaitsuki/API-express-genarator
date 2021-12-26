@@ -149,11 +149,11 @@ const orderSchema =mongoose.Schema({
   orderItemFormList: Array,
 });
 router.post("/order", function (req, res) {
-  const ordermodel = mongoose.model("order", orderSchema);
+  const ordermodel = mongoose.model("orders", orderSchema);
 
   //   IDを自動採番するために今あるデータ数を取得
   let totalcounts = 0;
-  ordermodel.countDocuments({},function (err, result) {
+  ordermodel.countDocuments(function (err, result) {
     totalcounts = result;
   });
 
