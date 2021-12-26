@@ -77,7 +77,7 @@ router.post("/register", function (req, res) {
   registermodel.find({ email: req.body.email }, function (err, result) {
     if (result.length === 0) {
       const register = new registermodel();
-      register.id = totalcount+1;
+      register.id = totalcount + 1;
       register.name = req.body.name;
       register.email = req.body.email;
       register.password = req.body.password;
@@ -133,4 +133,37 @@ router.post("/login", function (req, res) {
     }
   );
 });
+
+// 注文する
+const orderSchema = new mongoose.Schema({
+  userId: Number,
+  status: Number,
+  totalPrice: Number,
+  destinationName: String,
+  destinationEmail: String,
+  destinationZipcode: String,
+  destinationAddress: String,
+  destinationTel: String,
+  deliveryTime: Date,
+  paymentMethod: Number,
+  orderItemFormList: String,
+});
+router.post("/order", function (req, res) {
+  const ordermodel = new mongoose.model("order", orderSchema);
+  const order = new ordermodel();
+  order.userId = req.body.userId;
+  order.status = req.body.status;
+  order.totalPrice = req.body.totalPrice;
+  order.destinationName = req.body.destinationName;
+  order.destinationEmail = req.body.destinationEmail;
+  order.destinationZipcode = req.body.destinationZipcode;
+  order.destinationAddress = req.body.destinationAddress;
+  order.destinationTel = req.body.destinationTel;
+  order.deliveryTime = req.body.deliveryTime;
+  order.paymentMethod = req.body.paymentMethod;
+  order.orderItemFormList = req.body.orderItemFormList;
+  order.save();
+  res.send({ status: success, data: req.body });
+});
+
 module.exports = router;
