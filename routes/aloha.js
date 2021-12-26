@@ -145,7 +145,7 @@ const orderSchema = new mongoose.Schema({
   destinationTel: String,
   deliveryTime: String,
   paymentMethod: Number,
-  orderItemFormList: String,
+  orderItemFormList: Array,
 });
 router.post("/order", function (req, res) {
   const ordermodel = new mongoose.model("order", orderSchema);
