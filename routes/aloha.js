@@ -68,13 +68,14 @@ const registerSchema = mongoose.Schema({
 });
 router.post("/register", function (req, res) {
   const registermodel = mongoose.model("register", registerSchema);
+
+  //   IDを自動採番するために今あるデータ数を取得
   let totalcount = 0;
   registermodel.countDocuments(function (err, result) {
     totalcount = result;
   });
   registermodel.find({ email: req.body.email }, function (err, result) {
     if (result.length === 0) {
-      //   IDを自動採番するために今あるデータ数を取得
       const register = new registermodel();
       register.id = totalcount+1;
       register.name = req.body.name;
@@ -117,7 +118,7 @@ router.post("/login", function (req, res) {
           data: req.body,
           responseMap: {
             user: {
-              id: 1,
+              id: result[0].id,
               name: result[0].name,
               email: result[0].email,
               password: "**********",
