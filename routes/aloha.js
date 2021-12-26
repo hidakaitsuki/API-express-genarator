@@ -135,7 +135,7 @@ router.post("/login", function (req, res) {
 });
 
 // 注文する
-const orderSchema = new mongoose.Schema({
+const orderSchema =mongoose.Schema({
   id: Number,
   userId: Number,
   totalPrice: Number,
