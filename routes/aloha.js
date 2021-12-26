@@ -161,7 +161,7 @@ router.post("/order", function (req, res) {
   order.paymentMethod = req.body.paymentMethod;
   order.orderItemFormList = req.body.orderItemFormList;
   order.save();
-  res.send({ status: success, data: req.body });
+  res.send({ status: "success", data: req.body });
 });
 
 module.exports = router;
