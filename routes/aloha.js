@@ -68,7 +68,7 @@ const registerSchema = mongoose.Schema({
 });
 router.post("/register", function (req, res) {
   const registermodel = mongoose.model("register", registerSchema);
-  const totalcount = 0;
+  let totalcount = 0;
   registermodel.countDocuments(function (err, result) {
     totalcount = result;
   });
