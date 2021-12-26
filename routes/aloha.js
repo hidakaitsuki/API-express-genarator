@@ -71,7 +71,7 @@ router.post("/register", function (req, res) {
     if (result.length === 0) {
       //   IDを自動採番するために今あるデータ数を取得
       const totalcount = 0;
-      registermodel.find({}, function (err, result) {
+      registermodel.count({}, function (err, result) {
         totalcount = result.length;
       });
       const register = new registermodel();
