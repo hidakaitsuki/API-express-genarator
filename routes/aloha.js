@@ -84,18 +84,6 @@ router.post("/register", function (req, res) {
       res.send({
         status: "success",
         data: req.body,
-        responseMap: {
-          user: {
-            id: Number(totalcount) + 1,
-            name: req.body.name,
-            email: req.body.email,
-            password: "**********",
-            zipcode: req.body.zipcode,
-            address: req.body.address,
-            telephone: req.body.telephone,
-            admin: false,
-          },
-        },
       });
     } else {
       //  アドレスが既に登録済みの場合はエラーにする
