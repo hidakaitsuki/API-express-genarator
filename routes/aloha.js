@@ -1,5 +1,7 @@
 var express = require("express");
 var router = express.Router();
+// ローカルのときは3000番
+// http://localhost:3000
 // https://api-rks-generator.herokuapp.com/aloha
 const mongoose = require("mongoose");
 
@@ -67,15 +69,11 @@ const registerSchema = mongoose.Schema({
 router.post("/register", function (req, res) {
   const registermodel = mongoose.model("register", registerSchema);
 
-  const totalcount = 0;
-  registermodel.find({}, function (err, result) {
-    totalcount = Number(result.length);
-  });
   registermodel.find({ email: req.body.email }, function (err, result) {
     if (result.length === 0) {
       //   IDを自動採番するために今あるデータ数を取得
       const register = new registermodel();
-      register.id = totalcount;
+      register.id = 1;
       register.name = req.body.name;
       register.email = req.body.email;
       register.password = req.body.password;
