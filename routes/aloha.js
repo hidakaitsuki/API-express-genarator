@@ -67,10 +67,10 @@ const registerSchema = mongoose.Schema({
 router.post("/register", function (req, res) {
   const registermodel = mongoose.model("register", registerSchema);
 
+  const totalcount = registermodel.countDocuments();
   registermodel.find({ email: req.body.email }, function (err, result) {
     if (result.length === 0) {
       //   IDを自動採番するために今あるデータ数を取得
-      const totalcount = registermodel.countDocuments({});
       const register = new registermodel();
       register.id = 1 + Number(totalcount);
       register.name = req.body.name;
