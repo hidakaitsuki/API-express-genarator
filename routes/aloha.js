@@ -137,7 +137,6 @@ router.post("/login", function (req, res) {
 // 注文する
 const orderSchema = new mongoose.Schema({
   userId: Number,
-  status: Number,
   totalPrice: Number,
   destinationName: String,
   destinationEmail: String,
@@ -152,7 +151,6 @@ router.post("/order", function (req, res) {
   const ordermodel = new mongoose.model("order", orderSchema);
   const order = new ordermodel();
   order.userId = req.body.userId;
-  order.status = req.body.status;
   order.totalPrice = req.body.totalPrice;
   order.destinationName = req.body.destinationName;
   order.destinationEmail = req.body.destinationEmail;
