@@ -126,12 +126,12 @@ router.post("/login", function (req, res) {
           responseMap: {
             user: {
               id: 1,
-              name: req.body.name,
-              email: req.body.email,
+              name: result.name,
+              email: result.email,
               password: "**********",
-              zipcode: req.body.zipcode,
-              address: req.body.address,
-              telephone: req.body.telephone,
+              zipcode: result.zipcode,
+              address: result.address,
+              telephone: result.telephone,
               admin: false,
             },
           },
