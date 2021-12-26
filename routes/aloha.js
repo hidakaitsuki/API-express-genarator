@@ -125,7 +125,7 @@ router.post("/login", function (req, res) {
           data: req.body,
           responseMap: {
             user: {
-              id: Number(totalcount) + 1,
+              id: 1,
               name: req.body.name,
               email: req.body.email,
               password: "**********",
