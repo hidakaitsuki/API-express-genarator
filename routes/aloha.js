@@ -24,32 +24,66 @@ router.post("/", function (req, res) {
   items.save();
 });
 router.get("/", function (req, res) {
-    const itemmodel = mongoose.model("items", itemSchema);
-    itemmodel.find({}, function (error, result) {
-        res.send(result[0]);
-    });
+  const itemmodel = mongoose.model("items", itemSchema);
+  itemmodel.find({}, function (error, result) {
+    res.send(result[0]);
+  });
 });
-
 
 // 商品詳細
 router.post("/detail", function (req, res) {
-    const itemdetail = new itemdetailmodel();
-    itemdetail.items = req.body.item;
-    itemdetail.save();
+  const itemdetail = new itemdetailmodel();
+  itemdetail.items = req.body.item;
+  itemdetail.save();
 });
 
 const itemdetailSchema = mongoose.Schema({
-    _id: String,
-    item: Object,
-    __v: Number,
+  _id: String,
+  item: Object,
+  __v: Number,
 });
 router.get("/detail/:id", function (req, res) {
-    const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
+  const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
 
-  itemdetailmodel.find({"item.id":Number(req.params.id)}, function (err, result) {
-    res.send(result[0]);
+  itemdetailmodel.find(
+    { "item.id": Number(req.params.id) },
+    function (err, result) {
+      res.send(result[0]);
+    }
+  );
+  itemdetailmodel.find({});
+});
+
+// 会員登録
+const registerSchema = mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+  zipcode: String,
+  address: String,
+  telephone: String,
+});
+router.post("/register", function (req, res) {
+  const registermodel = mongoose.model("register", registerSchema);
+  registermodel.find({}, function (err, result) {
+    if (result.length === 0) {
+      const register = new registermodel();
+      register.name = req.body.name;
+      register.email = req.body.email;
+      register.password = req.body.password;
+      register.zipcode = req.body.zipcode;
+      register.address = req.body.address;
+      register.telephone = req.body.telephone;
+      register.save();
+      res.send({ status: "success", data: req.body });
+    } else {
+      res.send({
+        status: "error",
+        data: req.body,
+        message: "そのメールアドレスは既に登録済みです",
+      });
+    }
   });
-  itemdetailmodel.find({})
 });
 
 module.exports = router;
