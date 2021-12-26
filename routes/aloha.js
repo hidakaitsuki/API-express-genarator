@@ -120,7 +120,22 @@ router.post("/login", function (req, res) {
           message: "パスワードとアドレスが一致しません",
         });
       } else {
-        res.send({ status: "success", data: req.body });
+        res.send({
+          status: "success",
+          data: req.body,
+          responseMap: {
+            user: {
+              id: Number(totalcount) + 1,
+              name: req.body.name,
+              email: req.body.email,
+              password: "**********",
+              zipcode: req.body.zipcode,
+              address: req.body.address,
+              telephone: req.body.telephone,
+              admin: false,
+            },
+          },
+        });
       }
     }
   );
