@@ -143,7 +143,7 @@ const orderSchema = new mongoose.Schema({
   destinationZipcode: String,
   destinationAddress: String,
   destinationTel: String,
-  deliveryTime: Date,
+  deliveryTime: String,
   paymentMethod: Number,
   orderItemFormList: String,
 });
