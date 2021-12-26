@@ -72,7 +72,7 @@ router.post("/register", function (req, res) {
       //   IDを自動採番するために今あるデータ数を取得
       const totalcount = registermodel.countDocuments({});
       const register = new registermodel();
-      register.id = Number(totalcount) + 1;
+      register.id = 1 + Number(totalcount);
       register.name = req.body.name;
       register.email = req.body.email;
       register.password = req.body.password;
@@ -107,7 +107,7 @@ router.post("/register", function (req, res) {
     }
   });
 });
-
+// ログインする
 router.post("/login", function (req, res) {
   const loginmodel = mongoose.model("register", registerSchema);
   loginmodel.find(
