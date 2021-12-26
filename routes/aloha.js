@@ -77,6 +77,7 @@ router.post("/register", function (req, res) {
       register.save();
       res.send({ status: "success", data: req.body });
     } else {
+      //  アドレスが既に登録済みの場合はエラーにする
       res.send({
         status: "error",
         data: req.body,
@@ -86,4 +87,21 @@ router.post("/register", function (req, res) {
   });
 });
 
+router.post("/login", function (req, res) {
+  const loginmodel = mongoose.model("register", registerSchema);
+  loginmodel.find(
+    { email: req.body.email, password: req.body.password },
+    function (err, result) {
+      if (result.length === 0) {
+        res.send({
+          status: "error",
+          data: req.body,
+          message: "パスワードとアドレスが一致しません",
+        });
+      } else {
+        res.send({ status: "success", data: req.body });
+      }
+    }
+  );
+});
 module.exports = router;
