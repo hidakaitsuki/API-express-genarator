@@ -68,8 +68,8 @@ router.post("/register", function (req, res) {
   const registermodel = mongoose.model("register", registerSchema);
 
   const totalcount = 0;
-  registermodel.countDocuments({}, function (err, count) {
-    totalcount = count;
+  registermodel.find({}, function (err, result) {
+    totalcount = Number(result.length);
   });
   registermodel.find({ email: req.body.email }, function (err, result) {
     if (result.length === 0) {
