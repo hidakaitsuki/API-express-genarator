@@ -56,6 +56,7 @@ router.get("/detail/:id", function (req, res) {
 
 // 会員登録
 const registerSchema = mongoose.Schema({
+  id: Number,
   name: String,
   email: String,
   password: String,
@@ -65,9 +66,16 @@ const registerSchema = mongoose.Schema({
 });
 router.post("/register", function (req, res) {
   const registermodel = mongoose.model("register", registerSchema);
+
   registermodel.find({ email: req.body.email }, function (err, result) {
     if (result.length === 0) {
+      //   IDを自動採番するために今あるデータ数を取得
+      const totalcount = 0;
+      registermodel.find({}, function (err, result) {
+        totalcount = result.length;
+      });
       const register = new registermodel();
+      register.id = Number(totalcount) + 1;
       register.name = req.body.name;
       register.email = req.body.email;
       register.password = req.body.password;
@@ -75,7 +83,23 @@ router.post("/register", function (req, res) {
       register.address = req.body.address;
       register.telephone = req.body.telephone;
       register.save();
-      res.send({ status: "success", data: req.body });
+
+      res.send({
+        status: "success",
+        data: req.body,
+        responseMap: {
+          user: {
+            id: Number(totalcount) + 1,
+            name: req.body.name,
+            email: req.body.email,
+            password: "**********",
+            zipcode: req.body.zipcode,
+            address: req.body.address,
+            telephone: req.body.telephone,
+            admin: false,
+          },
+        },
+      });
     } else {
       //  アドレスが既に登録済みの場合はエラーにする
       res.send({
