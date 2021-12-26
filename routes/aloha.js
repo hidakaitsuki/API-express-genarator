@@ -65,7 +65,7 @@ const registerSchema = mongoose.Schema({
 });
 router.post("/register", function (req, res) {
   const registermodel = mongoose.model("register", registerSchema);
-  registermodel.find({}, function (err, result) {
+  registermodel.find({ email: req.body.email }, function (err, result) {
     if (result.length === 0) {
       const register = new registermodel();
       register.name = req.body.name;
