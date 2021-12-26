@@ -136,6 +136,7 @@ router.post("/login", function (req, res) {
 
 // 注文する
 const orderSchema = new mongoose.Schema({
+  id: Number,
   userId: Number,
   totalPrice: Number,
   destinationName: String,
@@ -149,7 +150,15 @@ const orderSchema = new mongoose.Schema({
 });
 router.post("/order", function (req, res) {
   const ordermodel = new mongoose.model("order", orderSchema);
+ 
+  //   IDを自動採番するために今あるデータ数を取得
+  let totalcount = 0;
+  ordermodel.countDocuments(function (err, result) {
+    totalcount = result;
+  });
+
   const order = new ordermodel();
+  order.id = totalcount + 1;
   order.userId = req.body.userId;
   order.totalPrice = req.body.totalPrice;
   order.destinationName = req.body.destinationName;
@@ -162,6 +171,14 @@ router.post("/order", function (req, res) {
   order.orderItemFormList = req.body.orderItemFormList;
   order.save();
   res.send({ status: "success", data: req.body });
+});
+
+// 注文履歴を表示
+router.post("/order/:id", function (req, res) {
+  const ordermodel = new mongoose.model("order", orderSchema);
+  ordermodel.find({ userId: req.params.id }, function (err, result) {
+    res.send(result);
+  });
 });
 
 module.exports = router;
