@@ -31,11 +31,22 @@ router.post("/register", function (req, res) {
     register.name = req.body.name;
     register.email = req.body.email;
     register.password = req.body.password;
-    register.save();
-    res.send({
-      status: "success",
-      data: req.body,
-      message: "会員登録成功",
+    registermodel.find({ email: req.body.email }, function (err, res) {
+      if (res.length === 0) {
+        register.save();
+        res.send({
+          status: "success",
+          data: req.body,
+          message: "会員登録成功",
+        });
+      } else {
+        //  アドレスが既に登録済みの場合はエラーにする
+        res.send({
+          status: "error",
+          data: req.body,
+          message: "そのメールアドレスは既に登録済みです",
+        });
+      }
     });
   });
 });
