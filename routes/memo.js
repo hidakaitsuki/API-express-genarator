@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema({
 // 会員登録
 const registermodel = mongoose.model("register", userSchema);
 router.post("/register", function (req, res) {
- const totalcount = 0;
+  const totalcount = 0;
   registermodel.find().count(function (err, result) {
     totalcount = result;
   });
@@ -32,6 +32,11 @@ router.post("/register", function (req, res) {
   register.email = req.body.email;
   register.password = req.body.password;
   register.save();
+  res.send({
+    status: "success",
+    data: req.body,
+    message: "会員登録成功",
+  });
 });
 
 // ログインする
