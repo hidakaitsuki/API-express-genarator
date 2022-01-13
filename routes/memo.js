@@ -24,7 +24,11 @@ router.get("/register", function (req, res) {
   const registermodel = mongoose.model("registers", userSchema);
   const register = new registermodel();
   registermodel.find({}, function (err, result) {
-    res.send(result.sort({id:-1}));
+    res.send(
+      result.sort(function (a, b) {
+        a.id > b.id ? -1 : 1;
+      })
+    );
   });
 
   //
