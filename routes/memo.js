@@ -24,7 +24,7 @@ router.post("/register", function (req, res) {
   const registermodel = mongoose.model("registers", userSchema);
   const totalcount = await registermodel.countDocuments({});
   const register = new registermodel();
-  register.id = totalcount + 1;
+  register.id = Number(totalcount) + 1;
   register.name = req.body.name;
   register.email = req.body.email;
   register.password = req.body.password;
