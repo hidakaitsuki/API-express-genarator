@@ -22,25 +22,22 @@ router.post("/register", function (req, res) {
     }
   );
   const registermodel = mongoose.model("registers", userSchema);
-  let totalcount = 0;
   registermodel.countDocuments({}, function (err, result) {
     if (err) {
       console.log(err);
     } else {
-      totalcount = result;
+      const register = new registermodel();
+      register.id = result + 1;
+      register.name = req.body.name;
+      register.email = req.body.email;
+      register.password = req.body.password;
+      register.save();
+      res.send({
+        status: "success",
+        data: req.body,
+        message: "会員登録成功",
+      });
     }
-  });
-
-  const register = new registermodel();
-  register.id = totalcount + 1;
-  register.name = req.body.name;
-  register.email = req.body.email;
-  register.password = req.body.password;
-  register.save();
-  res.send({
-    status: "success",
-    data: req.body,
-    message: "会員登録成功",
   });
 });
 
