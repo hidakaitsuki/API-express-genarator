@@ -15,7 +15,7 @@ mongoose.connect(
 const userSchema = mongoose.Schema({
   id: Number,
   name: String,
-  Email: String,
+  email: String,
   password: String,
 });
 
@@ -29,7 +29,7 @@ router.post("/register", function (req, res) {
   const register = new registermodel();
   register.id = totalcount + 1;
   register.name = req.body.name;
-  register.Email = req.body.Email;
+  register.email = req.body.email;
   register.password = req.body.password;
   register.save();
 });
