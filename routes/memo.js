@@ -24,7 +24,7 @@ router.post("/register", function (req, res) {
   const registermodel = mongoose.model("registers", userSchema);
   let totalcount = 0;
   const gettotalcount = async () => {
-    totalcount = await registermodel.countDocuments();
+    totalcount = await registermodel.countDocuments({});
   };
   gettotalcount();
   const register = new registermodel();
