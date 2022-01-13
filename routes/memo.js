@@ -25,9 +25,7 @@ router.get("/register", function (req, res) {
   const register = new registermodel();
   registermodel.find({}, function (err, result) {
     res.send(
-      result.sort(function (a, b) {
-       return a.id < b.id ? -1 : 1;
-      })
+      result[result.length]
     );
   });
 
