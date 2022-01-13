@@ -22,23 +22,38 @@ router.post("/register", function (req, res) {
     }
   );
   const registermodel = mongoose.model("registers", userSchema);
-  registermodel.countDocuments({}, function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      const register = new registermodel();
-      register.id = result + 1;
-      register.name = req.body.name;
-      register.email = req.body.email;
-      register.password = req.body.password;
-      register.save();
-      res.send({
-        status: "success",
-        data: req.body,
-        message: "会員登録成功",
-      });
-    }
-  });
+  const register = new registermodel();
+ const aaa= registermodel.find().sort({id:-1})
+ res.send(aaa)
+        // register.id = result + 1;
+        // register.name = req.body.name;
+        // register.email = req.body.email;
+        // register.password = req.body.password;
+        // register.save();
+        // res.send({
+        //   status: "success",
+        //   data: req.body,
+        //   message: "会員登録成功",
+        // });
+
+//   
+//   registermodel.countDocuments({}, function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       const register = new registermodel();
+//       register.id = result + 1;
+//       register.name = req.body.name;
+//       register.email = req.body.email;
+//       register.password = req.body.password;
+//       register.save();
+//       res.send({
+//         status: "success",
+//         data: req.body,
+//         message: "会員登録成功",
+//       });
+//     }
+//   });
 });
 
 // ログインする
