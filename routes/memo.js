@@ -21,7 +21,7 @@ const userSchema = mongoose.Schema({
 
 // 会員登録
 router.post("/register", function (req, res) {
-  const registermodel = mongoose.model("register", userSchema);
+  const registermodel = mongoose.model("registers", userSchema);
   const totalcount = 0;
   //   registermodel.find().count(function (err, result) {
   //     totalcount = result;
