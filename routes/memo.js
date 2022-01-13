@@ -22,7 +22,7 @@ router.post("/register", function (req, res) {
     }
   );
   const registermodel = mongoose.model("registers", userSchema);
-  const totalcount = await registermodel.countDocuments();
+  const totalcount = await registermodel.countDocuments({});
   const register = new registermodel();
   register.id = totalcount + 1;
   register.name = req.body.name;
