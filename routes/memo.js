@@ -31,8 +31,8 @@ router.post("/register", function (req, res) {
     register.name = req.body.name;
     register.email = req.body.email;
     register.password = req.body.password;
-    registermodel.find({ email: req.body.email }, function (err, res) {
-      if (res.length === 0) {
+    registermodel.find({ email: req.body.email }, function (err, resultemail) {
+      if (resultemail.length === 0) {
         register.save();
         res.send({
           status: "success",
