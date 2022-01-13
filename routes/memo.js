@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema({
 // 会員登録
 const registermodel = mongoose.model("register", userSchema);
 router.post("/register", function (req, res) {
-  totalcount = 0;
+ const totalcount = 0;
   registermodel.find().count(function (err, result) {
     totalcount = result;
   });
