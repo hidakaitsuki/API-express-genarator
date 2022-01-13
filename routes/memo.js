@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
 });
 
 // 会員登録
-router.post("/register", function (req, res) {
+router.get("/register", function (req, res) {
   mongoose.connect(
     // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
     `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
