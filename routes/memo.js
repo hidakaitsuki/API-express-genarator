@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
 });
 
 // 会員登録
-router.get("/register", function (req, res) {
+router.post("/register", function (req, res) {
   mongoose.connect(
     // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
     `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
@@ -23,30 +23,21 @@ router.get("/register", function (req, res) {
   );
   const registermodel = mongoose.model("registers", userSchema);
   const register = new registermodel();
+  //   全件取得した後、一番最後のIDを取得（自動採番）
   registermodel.find({}, function (err, result) {
-    res.send(
-      result[result.length-1]
-    );
+    const register = new registermodel();
+    // 配列の一番最後のID番号に＋1
+    register.id = result[result.length - 1].id + 1;
+    register.name = req.body.name;
+    register.email = req.body.email;
+    register.password = req.body.password;
+    register.save();
+    res.send({
+      status: "success",
+      data: req.body,
+      message: "会員登録成功",
+    });
   });
-
-  //
-  //   registermodel.countDocuments({}, function (err, result) {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       const register = new registermodel();
-  //       register.id = result + 1;
-  //       register.name = req.body.name;
-  //       register.email = req.body.email;
-  //       register.password = req.body.password;
-  //       register.save();
-  //       res.send({
-  //         status: "success",
-  //         data: req.body,
-  //         message: "会員登録成功",
-  //       });
-  //     }
-  //   });
 });
 
 // ログインする
