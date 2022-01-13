@@ -5,22 +5,22 @@ var router = express.Router();
 // https://api-rks-generator.herokuapp.com/memo
 const mongoose = require("mongoose");
 
-mongoose.connect(
-  // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
-  `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
-  () => {
-    console.log("mongoDBに接続しました");
-  }
-);
 const userSchema = mongoose.Schema({
-  id: Number,
-  name: String,
-  email: String,
-  password: String,
+    id: Number,
+    name: String,
+    email: String,
+    password: String,
 });
 
 // 会員登録
 router.post("/register", function (req, res) {
+    mongoose.connect(
+      // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
+      `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
+      () => {
+        console.log("mongoDBに接続しました");
+      }
+    );
   const registermodel = mongoose.model("registers", userSchema);
   const totalcount = 0;
   //   registermodel.find().count(function (err, result) {
