@@ -9,6 +9,7 @@ var usersRouter = require("./routes/users");
 // ここに新しく作りたいAPI追加
 var samples = require("./routes/samples");
 var aloha = require("./routes/aloha");
+var memo = require("./routes/memo");
 
 // mongoDBを簡単に操作できる「mongoose」をインポート
 var mongoose = require("mongoose");
@@ -29,13 +30,12 @@ app.use(express.static(path.join(__dirname, "public")));
 // cors（アクセスを許可する仕組み）は下のAPIのuseよりも上にする
 app.use(cors());
 
-
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 // ここの下に上で作ったAPI
 app.use("/samples", samples);
 app.use("/aloha", aloha);
-
+app.use("/memo", memo);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
