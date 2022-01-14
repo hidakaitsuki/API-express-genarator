@@ -53,6 +53,13 @@ router.post("/register", function (req, res) {
 
 // ログインする
 router.post("/login", function (req, res) {
+  mongoose.connect(
+    // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
+    `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
+    () => {
+      console.log("mongoDBに接続しました");
+    }
+  );
   const loginmodel = mongoose.model("register", userSchema);
   loginmodel.find(
     { email: req.body.email, password: req.body.password },
