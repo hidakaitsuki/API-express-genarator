@@ -83,7 +83,7 @@ router.post("/login", function (req, res) {
 const memoSchema = mongoose.Schema({
   id: Number,
   title: String,
-  contetnts: String,
+  contents: String,
   date: Date,
   user: Object,
 });
