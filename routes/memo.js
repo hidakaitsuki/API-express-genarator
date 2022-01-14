@@ -97,13 +97,13 @@ router.post("/newmemo", function (req, res) {
     }
   );
   const memomodel = mongoose.model("memo", memoSchema);
-  const memo = new memomodel();
   //   全件取得した後、一番最後のIDを取得（自動採番）
   memomodel.find({}, function (err, result) {
+    const memo = new memomodel();
     memo.id = result[result.length - 1].id + 1;
     memo.title = req.body.title;
     memo.contetnts = req.body.contetnts;
-    memo.date=req.body.date
+    memo.date = req.body.date;
     memo.user = req.body.user;
     memo.save();
     res.send({ status: "success", data: req.body });
