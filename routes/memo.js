@@ -87,6 +87,7 @@ const memoSchema = mongoose.Schema({
   date: Date,
   user: String,
 });
+
 // メモ新規作成
 router.post("/newmemo", function (req, res) {
   mongoose.connect(
