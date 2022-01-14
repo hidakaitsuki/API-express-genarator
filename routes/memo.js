@@ -97,7 +97,7 @@ router.post("/newmemo", function (req, res) {
       console.log("mongoDBに接続しました");
     }
   );
-  const memomodel = mongoose.model("memo", memoSchema);
+  const memomodel = mongoose.model("memos", memoSchema);
   //   全件取得した後、一番最後のIDを取得（自動採番）
   memomodel.find({}, function (err, result) {
     const memo = new memomodel();
