@@ -66,7 +66,7 @@ router.post("/login", function (req, res) {
       } else {
         res.send({
           status: "success",
-          data: req.body,
+          data: result,
           message: "ログイン成功",
         });
       }
