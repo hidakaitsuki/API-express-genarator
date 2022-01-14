@@ -89,7 +89,7 @@ const memoSchema = mongoose.Schema({
 });
 
 // メモ新規作成
-router.post("/newmemo", function (req, res) {
+router.post("/memo", function (req, res) {
   mongoose.connect(
     // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
     `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
@@ -110,50 +110,17 @@ router.post("/newmemo", function (req, res) {
     res.send({ status: "success", data: req.body });
   });
 });
-
-// 注文する
-const orderSchema = mongoose.Schema({
-  id: Number,
-  userId: Number,
-  totalPrice: Number,
-  destinationName: String,
-  destinationEmail: String,
-  destinationZipcode: String,
-  destinationAddress: String,
-  destinationTel: String,
-  deliveryTime: String,
-  paymentMethod: Number,
-  orderItemFormList: Array,
-});
-router.post("/order", function (req, res) {
-  const ordermodel = mongoose.model("order", orderSchema);
-
-  //   IDを自動採番するために今あるデータ数を取得
-  let totalcount = 0;
-  ordermodel.countDocuments(function (err, result) {
-    totalcount = result;
-  });
-
-  const order = new ordermodel();
-  order.id = totalcount + 1;
-  order.userId = req.body.userId;
-  order.totalPrice = req.body.totalPrice;
-  order.destinationName = req.body.destinationName;
-  order.destinationEmail = req.body.destinationEmail;
-  order.destinationZipcode = req.body.destinationZipcode;
-  order.destinationAddress = req.body.destinationAddress;
-  order.destinationTel = req.body.destinationTel;
-  order.deliveryTime = req.body.deliveryTime;
-  order.paymentMethod = req.body.paymentMethod;
-  order.orderItemFormList = req.body.orderItemFormList;
-  order.save();
-  res.send({ status: "success", data: req.body });
-});
-
-// 注文履歴を表示
-router.post("/order/:id", function (req, res) {
-  const ordermodel = new mongoose.model("order", orderSchema);
-  ordermodel.find({ userId: req.params.id }, function (err, result) {
+router.get("/memo/:id", function (req, res) {
+  mongoose.connect(
+    // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
+    `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
+    () => {
+      console.log("mongoDBに接続しました");
+    }
+  );
+  const memomodel = mongoose.model("memo", memoSchema);
+  //   全件取得した後、一番最後のIDを取得（自動採番）
+  memomodel.find({ "user.id": Number(req.params.id) }, function (err, result) {
     res.send(result);
   });
 });
