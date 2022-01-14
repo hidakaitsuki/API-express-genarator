@@ -80,6 +80,35 @@ router.post("/login", function (req, res) {
     }
   );
 });
+const memoSchema = mongoose.Schema({
+  id: Number,
+  title: String,
+  contetnts: String,
+  date: Date,
+  user: String,
+});
+// メモ新規作成
+router.post("/newmemo", function (req, res) {
+  mongoose.connect(
+    // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
+    `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
+    () => {
+      console.log("mongoDBに接続しました");
+    }
+  );
+  const memomodel = mongoose.model("memo", memoSchema);
+  const memo = new memomodel();
+  //   全件取得した後、一番最後のIDを取得（自動採番）
+  memomodel.find({}, function (err, result) {
+    memo.id = result[result.length - 1].id + 1;
+    memo.title = req.body.title;
+    memo.contetnts = req.body.contetnts;
+    memo.date=req.body.date
+    memo.user = req.body.user;
+    memo.save();
+    res.send({ status: "success", data: req.body });
+  });
+});
 
 // 注文する
 const orderSchema = mongoose.Schema({
