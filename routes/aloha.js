@@ -45,6 +45,13 @@ const itemdetailSchema = mongoose.Schema({
   __v: Number,
 });
 router.get("/detail/:id", function (req, res) {
+  mongoose.connect(
+    // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
+    `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/aloha?retryWrites=true&w=majority`,
+    () => {
+      console.log("mongoDBに接続しました");
+    }
+  );
   const itemdetailmodel = mongoose.model("itemdetails", itemdetailSchema);
 
   itemdetailmodel.find(
