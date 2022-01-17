@@ -140,7 +140,8 @@ router.post("/memo/update", function (req, res) {
     result.title = req.body.title;
     result.contents = req.body.contents;
     result.date = req.body.date;
-    result.save();
+    // result.save();
+res.send(req.body)
   });
 });
 
