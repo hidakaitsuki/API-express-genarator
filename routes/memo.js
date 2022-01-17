@@ -107,8 +107,8 @@ router.post("/memo", function (req, res) {
     memo.contents = req.body.contents;
     memo.date = req.body.date,
     memo.user = req.body.user;
+    res.send({ status: "success", data: memo });
     memo.save();
-    res.send({ status: "success", data: req.body });
   });
 });
 // ユーザーごとにメモを取得
