@@ -1,3 +1,4 @@
+const { format } = require("date-fns");
 var express = require("express");
 var router = express.Router();
 // ローカルのときは3000番
@@ -104,7 +105,7 @@ router.post("/memo", function (req, res) {
     memo.id = result[result.length - 1].id + 1;
     memo.title = req.body.title;
     memo.contents = req.body.contents;
-    memo.date = req.body.date;
+    memo.date = format(req.body.date, "YYYY/MM/dd");
     memo.user = req.body.user;
     memo.save();
     res.send({ status: "success", data: req.body });
