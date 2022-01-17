@@ -107,8 +107,8 @@ router.post("/memo", function (req, res) {
     memo.contents = req.body.contents;
     memo.date = req.body.date,
     memo.user = req.body.user;
-    res.send({ status: "success", data: memo });
     memo.save();
+    res.send({ status: "success", data: req.body });
   });
 });
 // ユーザーごとにメモを取得
@@ -123,7 +123,7 @@ router.get("/memo/:id", function (req, res) {
   const memomodel = mongoose.model("memo", memoSchema);
   //   全件取得した後、一番最後のIDを取得（自動採番）
   memomodel.find({ "user.id": Number(req.params.id) }, function (err, result) {
-    res.send(result);
+    res.send(result.data);
   });
 });
 
