@@ -85,7 +85,7 @@ const memoSchema = mongoose.Schema({
   id: Number,
   title: String,
   contents: String,
-  date: Date,
+  date: String,
   user: Object,
 });
 
