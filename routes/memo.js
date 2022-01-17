@@ -144,5 +144,18 @@ router.post("/memo/update", function (req, res) {
     res.send(req.body);
   });
 });
-
+router.post("/memo/delete", function (req, res) {
+  mongoose.connect(
+    // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
+    `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
+    () => {
+      console.log("mongoDBに接続しました");
+    }
+  );
+  const memomodel = mongoose.model("memo", memoSchema);
+  // 渡されたメモのIDを検索し、内容を変更して保存する
+  memomodel.find({ id: req.body.id }, function (err, result) {
+    result[0].remove();
+  });
+});
 module.exports = router;
