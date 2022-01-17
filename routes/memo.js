@@ -135,7 +135,7 @@ router.post("/memo/update", function (req, res) {
     }
   );
   const memomodel = mongoose.model("memo", memoSchema);
-  //   全件取得した後、一番最後のIDを取得（自動採番）
+  // 渡されたメモのIDを検索し、内容を変更して保存する
   memomodel.find({ id: req.body.id }, function (err, result) {
     result[0].title = req.body.detail.title;
     result[0].contents = req.body.detail.contents;
