@@ -144,6 +144,7 @@ router.post("/memo/update", function (req, res) {
     res.send(req.body);
   });
 });
+// 渡されたメモIDを削除する
 router.post("/memo/delete", function (req, res) {
   mongoose.connect(
     // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
@@ -153,7 +154,7 @@ router.post("/memo/delete", function (req, res) {
     }
   );
   const memomodel = mongoose.model("memo", memoSchema);
-  // 渡されたメモのIDを検索し、内容を変更して保存する
+  // 渡されたメモのIDを検索し削除する
   memomodel.remove({ id: req.body.id }, function (err) {
     res.send("daleted")
   });
