@@ -105,8 +105,7 @@ router.post("/memo", function (req, res) {
     memo.id = result[result.length - 1].id + 1;
     memo.title = req.body.title;
     memo.contents = req.body.contents;
-    memo.date = req.body.date,
-    memo.user = req.body.user;
+    (memo.date = req.body.date), (memo.user = req.body.user);
     memo.save();
     res.send({ status: "success", data: req.body });
   });
@@ -124,6 +123,24 @@ router.get("/memo/:id", function (req, res) {
   //   全件取得した後、一番最後のIDを取得（自動採番）
   memomodel.find({ "user.id": Number(req.params.id) }, function (err, result) {
     res.send(result);
+  });
+});
+// 内容を変更する
+router.post("/memo/update", function (req, res) {
+  mongoose.connect(
+    // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
+    `mongodb+srv://${process.env.NAME}:${process.env.PASS}@cluster0.bwr5d.mongodb.net/memo?retryWrites=true&w=majority`,
+    () => {
+      console.log("mongoDBに接続しました");
+    }
+  );
+  const memomodel = mongoose.model("memo", memoSchema);
+  //   全件取得した後、一番最後のIDを取得（自動採番）
+  memomodel.find({ id: req.body.id }, function (err, result) {
+    result.title = req.body.title;
+    result.contents = req.body.contents;
+    result.date = req.body.date;
+    result.save();
   });
 });
 
