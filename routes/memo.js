@@ -137,11 +137,11 @@ router.post("/memo/update", function (req, res) {
   const memomodel = mongoose.model("memo", memoSchema);
   //   全件取得した後、一番最後のIDを取得（自動採番）
   memomodel.find({ id: req.body.id }, function (err, result) {
-    result.title = req.body.title;
-    result.contents = req.body.contents;
+    result.title = req.body.detail.title;
+    result.contents = req.body.detail.contents;
     result.date = req.body.date;
-    // result.save();
-res.send(req.body)
+    result.save();
+    res.send(req.body);
   });
 });
 
