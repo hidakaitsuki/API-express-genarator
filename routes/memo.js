@@ -154,8 +154,8 @@ router.post("/memo/delete", function (req, res) {
   );
   const memomodel = mongoose.model("memo", memoSchema);
   // 渡されたメモのIDを検索し、内容を変更して保存する
-  memomodel.find({ id: req.body.id }, function (err, result) {
- 
+  memomodel.remove({ id: req.body.id }, function (err) {
+    res.send("daleted")
   });
 });
 module.exports = router;
