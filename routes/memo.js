@@ -111,6 +111,7 @@ router.post("/memo", function (req, res) {
     res.send({ status: "success", data: req.body });
   });
 });
+// ユーザーごとにメモを取得
 router.get("/memo/:id", function (req, res) {
   mongoose.connect(
     // herokuに登録した環境変数をもってくる「process.env.設定したkey」でもってこれる
