@@ -69,7 +69,7 @@ router.post("/login", function (req, res) {
         res.send({
           status: "error",
           data: req.body,
-          message: "パスワードとアドレスが一致しません",
+          message: "メールアドレスとパスワードが一致しません",
         });
       } else {
         res.send({
@@ -156,7 +156,7 @@ router.post("/memo/delete", function (req, res) {
   const memomodel = mongoose.model("memo", memoSchema);
   // 渡されたメモのIDを検索し削除する
   memomodel.remove({ id: req.body.id }, function (err) {
-    res.send("daleted")
+    res.send("daleted");
   });
 });
 module.exports = router;
