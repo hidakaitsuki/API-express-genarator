@@ -5,9 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 // ここに新しく作りたいAPI追加
-var samples = require("./routes/samples");
 var aloha = require("./routes/aloha");
 var memo = require("./routes/memo");
 
@@ -31,9 +29,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 // ここの下に上で作ったAPI
-app.use("/samples", samples);
 app.use("/aloha", aloha);
 app.use("/memo", memo);
 
