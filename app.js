@@ -4,16 +4,19 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var indexRouter = require("./routes/index");
 // ここに新しく作りたいAPI追加
-var aloha = require("./routes/aloha");
+
 var memo = require("./routes/memo");
+var s3 = require("./routes/s3");
 
 // mongoDBを簡単に操作できる「mongoose」をインポート
 var mongoose = require("mongoose");
 
 const cors = require("cors");
 var app = express();
+
+// 環境変数を受けとる(.envファイル)
+require("dotenv").config();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -28,10 +31,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // cors（アクセスを許可する仕組み）は下のAPIのuseよりも上にする
 app.use(cors());
 
-app.use("/", indexRouter);
 // ここの下に上で作ったAPI
-app.use("/aloha", aloha);
 app.use("/memo", memo);
+app.use("/s3", s3);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
